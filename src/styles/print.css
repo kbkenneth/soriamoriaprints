@@ -1,0 +1,451 @@
+:root {
+  --section-space-large: 8rem;
+  --section-space-medium: 6rem;
+  --section-space-small: 4rem;
+}
+
+/* ===================== */
+/* PRINT HERO            */
+/* ===================== */
+
+.print-hero {
+  padding-top: 8rem;
+  padding-bottom: 5rem;
+  text-align: center;
+}
+
+.print-hero img {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  display: block;
+  box-shadow: var(--shadow-soft);
+}
+
+.print-hero h1 {
+  margin-top: 3rem;
+  font-size: var(--step-4);
+  line-height: 1.2;
+}
+
+
+/* ============================= */
+/* FULL BLEED HERO */
+/* ============================= */
+
+.print-hero-full {
+  width: 100%;
+  overflow: hidden;
+}
+
+.print-hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================= */
+/* INTRO SECTION */
+/* ============================= */
+
+/* ============================= */
+/* FULL WIDTH HERO (EDITORIAL) */
+/* ============================= */
+
+.print-hero-full {
+  padding-top: var(--section-space-large);
+  padding-bottom: var(--section-space-medium);
+}
+
+.print-hero-image {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.print-hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: var(--shadow-soft);
+}
+
+.print-note {
+  margin-top: 4rem;
+  font-size: var(--step--1);
+  line-height: 1.6;
+  max-width: 40ch;
+  opacity: 0.65;
+}
+
+.print-paper {
+  margin-top: 1.5rem;
+  font-size: var(--step--1);
+  line-height: 1.6;
+  max-width: 40ch;
+  opacity: 0.75;
+}
+
+
+/* ============================= */
+/* INTRO SECTION */
+/* ============================= */
+
+.print-intro {
+  padding: 4rem 0 8rem 0;
+  text-align: center;
+}
+
+.print-intro {
+  padding-top: var(--section-space-small);
+  padding-bottom: var(--section-space-large);
+  text-align: center;
+}
+
+.print-title {
+  font-size: var(--step-6);
+  line-height: 1.08;
+  margin: 0 0 2rem 0;
+  letter-spacing: -0.02em;
+}
+
+.print-excerpt {
+  font-size: var(--step-1);
+  max-width: 38ch;
+  margin: 0 auto;
+  line-height: 1.65;
+  color: var(--color-deep-blue);
+}
+
+
+
+/* ============================= */
+/* BODY */
+/* ============================= */
+
+.print-body {
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+}
+
+.print-body .narrow {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.print-body p {
+  margin-bottom: 1.9rem;
+  line-height: 1.7;
+}
+
+.print-body p:first-of-type {
+  font-size: var(--step-1);
+}
+
+.signature-badge {
+  font-size: var(--step--2);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.signature-note {
+  margin: 2rem auto 0 auto;
+  max-width: 680px;
+  font-size: var(--step--1);
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.size-option.recommended {
+  border-color: var(--color-deep-blue);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.signature-hero {
+  padding-top: 8rem;
+  padding-bottom: 6rem;
+}
+
+
+
+/* ============================= */
+/* RELATED */
+/* ============================= */
+
+.related {
+  padding-top: var(--section-space-large);
+  padding-bottom: var(--section-space-large);
+}
+
+.related-title {
+  font-size: var(--step-3);
+  margin-bottom: 3rem;
+  opacity: 0.85;
+}
+
+
+/* ===================== */
+/* RELATED WORKS         */
+/* ===================== */
+
+.related-section {
+  padding-top: 6rem;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 3.5rem;
+}
+
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 900px) {
+  .print-hero .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .print-info h1 {
+    font-size: var(--step-5);
+  }
+
+  .print-image {
+    order: -1;
+  }
+}
+
+/* ============================= */
+/* PURCHASE SECTION */
+/* ============================= */
+
+.purchase {
+  margin-top: 5rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  text-align: left;
+}
+
+.purchase h2 {
+  font-size: var(--step-1);
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.4rem;
+}
+
+.purchase-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.purchase-label {
+  font-size: var(--step--2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 1rem;
+}
+
+.size-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.size-option {
+  font-size: var(--step--1);
+  letter-spacing: 0.03em;
+}
+
+
+.size-option.active {
+  border-color: var(--color-gold);
+  background: rgba(0,0,0,0.02);
+}
+
+
+@media (max-width: 768px) {
+  .size-selector {
+    flex-direction: column;
+  }
+
+  .size-option {
+    width: auto;
+    max-width: 100%;
+    text-align: left;
+  }
+
+  
+}
+
+
+.size-options {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.size-option {
+  padding: 0.9rem 1.2rem;
+  border: 1px solid rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.size-option:hover {
+  border-color: var(--color-deep-blue);
+}
+
+.size-option.active {
+  border-color: var(--color-gold);
+}
+
+.purchase-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.purchase-price {
+  font-size: var(--step-2);
+  font-family: var(--font-display);
+  color: var(--color-deep-blue);
+}
+
+.price-display {
+  font-size: var(--step-2);
+  font-family: var(--font-display);
+  margin-top: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.purchase .btn-gold {
+  font-size: var(--step--1);
+  padding: 0.8rem 1.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+
+@media (max-width: 900px) {
+  .purchase-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .purchase-cta {
+    align-items: flex-start;
+  }
+}
+
+/* ============================= */
+/* FOR STORE SKJERMER */
+/* ============================= */
+
+.print-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1.25;
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.01em;
+}
+
+.print-card .excerpt {
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--color-muted);
+  margin-bottom: 0.9rem;
+}
+
+.print-card .price {
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+  color: var(--color-deep-blue);
+  opacity: 0.75;
+}
+
+.featured-grid {
+  row-gap: 4.5rem;
+}
+
+.print-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.print-card img {
+  box-shadow: var(--shadow-soft);
+}
+
+.print-card a:hover h3 {
+  color: var(--color-gold);
+}
+
+@media (min-width: 1440px) {
+  .print-card h3 {
+    font-size: 1.65rem;
+  }
+
+  .featured-grid {
+    column-gap: 4rem;
+  }
+}
+
+@media (min-width: 1440px) {
+
+  .print-hero {
+    padding-top: 9rem;
+    padding-bottom: 6rem;
+  }
+
+  .print-hero img {
+    max-width: 1100px;
+  }
+
+  .print-body .narrow {
+    max-width: 720px;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .print-hero {
+    padding-top: 5rem;
+    padding-bottom: 3rem;
+  }
+
+  .print-hero h1 {
+    font-size: 2rem;
+  }
+
+  .print-body {
+    padding-top: 2rem;
+  }
+
+  .purchase {
+    margin-top: 3rem;
+    padding-top: 2rem;
+  }
+
+  .related-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+}

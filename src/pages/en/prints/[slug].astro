@@ -1,0 +1,259 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PrintCard from "../../../components/prints/PrintCard.astro";
+import { getCollection } from "astro:content";
+import "../../../styles/print.css";
+
+/* ===========================
+   STATIC PATHS (ENGLISH)
+=========================== */
+
+const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+  const prints = (await getCollection("prints"))
+    .filter((p) => p.data.lang === "en");
+
+  return prints.map((print) => {
+    const slug =
+      print.id.split("/").pop()?.replace(".md", "") ?? "";
+
+    return {
+      params: { slug },
+    };
+  });
+}
+
+const allPrints = await getCollection("prints");
+
+const print = allPrints.find((p) => {
+  const fileSlug =
+    p.id.split("/").pop()?.replace(".md", "") ?? "";
+
+  return (
+    p.data.lang === "en" &&
+    fileSlug === slug
+  );
+});
+
+if (!print) {
+  throw new Error(`Print not found: ${slug}`);
+}
+
+
+import { render } from "astro:content";
+
+const { Content } = await render(print);
+
+/* ===========================
+   RELATED WORKS
+=========================== */
+
+const currentSlug =
+  print.id.split("/").pop()?.replace(".md", "") ?? "";
+
+const relatedPrints = allPrints
+  .filter((p) => p.data.lang === print.data.lang)
+  .filter((p) => {
+    const otherSlug =
+      p.id.split("/").pop()?.replace(".md", "") ?? "";
+    return otherSlug !== slug;
+  })
+  .slice(0, 5);
+
+console.log("CURRENT SLUG:", slug);
+console.log(
+  "SAME LANG PRINTS:",
+  allPrints
+    .filter(p => p.data.lang === print.data.lang)
+    .map(p => p.id)
+);
+
+
+---
+
+<BaseLayout
+  title={`${print.data.title} – SoriaMoriaPrints`}
+  description={print.data.excerpt}
+  image={print.data.cover}
+>
+
+<section class="print-hero-full">
+  <div class="print-hero-image">
+    <img
+      src={print.data.cover}
+      alt={print.data.title}
+      loading="eager"
+    />
+  </div>
+</section>
+
+<section class="print-intro">
+  <div class="container narrow">
+
+    <p class="section-meta">Fine Art Print</p>
+
+    <h1 class="print-title">
+      {print.data.title}
+      {slug === "soria-moria-slott" && (
+      <p class="signature-badge">
+        Signature Work
+      </p>
+      )}      
+    </h1>
+
+    <p class="print-excerpt">
+      {print.data.excerpt}
+    </p>
+    {slug === "soria-moria-slott" && (
+      <p class="signature-note">
+        The motif forms the visual and thematic foundation of SoriaMoriaPrints.
+      </p>
+    )}
+  </div>
+</section>
+
+<section class="print-body">
+  <div class="container narrow">
+
+    <Content />
+
+    <p class="print-note">
+      {print.data.lang === "no"
+        ? "Trykket leveres uinnrammet, slik at innramming kan tilpasses rom og stemning."
+        : "The print is delivered unframed, allowing framing to complement light and setting."}
+    </p>
+    <p class="print-paper">
+      {print.data.lang === "no"
+        ? "Produsert som giclée på 308 g/m² Hahnemühle Photo Rag — et matt, 100 % bomullspapir med myk overflate og arkivbestandig kvalitet, valgt for dybde, detalj og varighet."
+        : "Produced as a giclée print on 308 gsm Hahnemühle Photo Rag — a matte 100% cotton paper selected for depth, detail and archival permanence."}
+    </p>
+
+    <!-- PURCHASE SECTION -->
+<section class="purchase">
+  <div class="narrow">
+
+    <h2>Choose size</h2>
+
+    <div class="size-selector">
+      {print.data.sizes.map((size, index) => (
+        <button
+          type="button"
+          class={`size-option ${index === 0 ? "active" : ""}`}
+          data-price={size.price}
+          data-sku={size.sku}
+          data-label={size.label}
+        >
+          {size.label}
+        </button>
+      ))}
+    </div>
+
+    <p id="dynamic-price" class="price-display">
+      {print.data.sizes[0].price} NOK
+    </p>
+
+    <button
+      id="add-to-cart"
+      class="snipcart-add-item btn-gold"
+      data-item-id={print.data.sizes[0].sku}
+      data-item-price={print.data.sizes[0].price}
+      data-item-name={print.data.title}
+      data-item-url={Astro.url.pathname}
+      data-item-description={print.data.excerpt}
+      data-item-image={print.data.cover}
+      data-item-custom1-name="Størrelse"
+      data-item-custom1-value={print.data.sizes[0].label}
+    >
+      Add to chart
+    </button>
+
+  </div>
+</section>
+
+  </div>
+</section>
+
+<section class={`print-hero-full ${slug === "soria-moria-slott" ? "signature-hero" : ""}`}>
+
+{relatedPrints.length > 0 && (
+  <section class="related">
+    <div class="container">
+
+      <h2 class="related-title">
+        {slug === "soria-moria-slott"
+          ? "Further Tales from the North"
+          : "Related Works"}
+      </h2>
+
+      <div class="related-grid">
+        {relatedPrints.map((p) => (
+          <PrintCard
+            title={p.data.title}
+            id={p.id}
+            image={p.data.cover}
+            price={p.data.price}
+            lang="en"
+          />
+        ))}
+      </div>
+
+    </div>
+  </section>
+)}
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    const sizeButtons = document.querySelectorAll(".size-option");
+    const priceDisplay = document.getElementById("dynamic-price");
+    const addToCart = document.getElementById("add-to-cart");
+
+    if (!priceDisplay || !addToCart) return;
+
+    let selectedLabel = "";
+    let selectedPrice = "";
+    let selectedSku = "";
+
+    // Finn default aktiv knapp
+    const activeButton = document.querySelector(".size-option.active");
+
+    if (activeButton) {
+      selectedLabel = activeButton.getAttribute("data-label") || "";
+      selectedPrice = activeButton.getAttribute("data-price") || "";
+      selectedSku = activeButton.getAttribute("data-sku") || "";
+
+      if (selectedLabel && selectedPrice && selectedSku) {
+        priceDisplay.textContent = selectedPrice + " NOK";
+
+        addToCart.setAttribute("data-item-id", selectedSku);
+        addToCart.setAttribute("data-item-price", selectedPrice);
+        addToCart.setAttribute("data-item-custom1-value", selectedLabel);
+      }
+    }
+
+    sizeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+
+        sizeButtons.forEach((b) => b.classList.remove("active"));
+        button.classList.add("active");
+
+        selectedLabel = button.getAttribute("data-label") || "";
+        selectedPrice = button.getAttribute("data-price") || "";
+        selectedSku = button.getAttribute("data-sku") || "";
+
+        if (!selectedLabel || !selectedPrice || !selectedSku) return;
+
+        priceDisplay.textContent = selectedPrice + " NOK";
+
+        addToCart.setAttribute("data-item-id", selectedSku);
+        addToCart.setAttribute("data-item-price", selectedPrice);
+        addToCart.setAttribute("data-item-custom1-value", selectedLabel);
+      });
+    });
+
+  });
+</script>
+
+
+</BaseLayout>

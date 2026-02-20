@@ -1,0 +1,53 @@
+  /* ============================= */
+  /* ABOUT PAGE – EDITORIAL STYLE */
+  /* ============================= */
+
+  .about-intro {
+    padding: 8rem 0;
+  }
+
+  .series-intro::after {
+    margin: 4rem auto 0 auto;
+  }
+
+  .about-intro h1 {
+    font-size: var(--step-4);     /* mindre enn produktsider */
+    text-align: center;
+    margin-bottom: 3.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* Subtil kapittelmarkering */
+  .about-intro h1::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 1px;
+    background: var(--color-gold-soft);
+    margin: 2rem auto 0 auto;
+    opacity: 0.6;
+  }
+
+  /* Tekstblokk */
+  .about-text {
+    max-width: 680px;   /* bokfølelse */
+    margin: 0 auto;
+    margin-bottom: 1.8rem;
+  }
+
+  /* Første avsnitt som ingress */
+  .about-text p:first-of-type {
+    font-size: var(--step-1);
+    line-height: 1.7;
+  }
+
+  /* Vanlige avsnitt */
+  .about-text p {
+    margin-bottom: 1.9rem;
+    line-height: 1.7;
+  }
+
+  /* Siste avsnitt litt mer luft under */
+  .about-text p:last-of-type {
+    margin-bottom: 0;
+  }

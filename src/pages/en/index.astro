@@ -1,0 +1,104 @@
+---
+import "../../styles/home.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PrintCard from "../../components/prints/PrintCard.astro";
+import { getCollection } from "astro:content";
+import { translations } from "../../lib/i18n";
+
+const t = translations.en;
+
+const prints = (await getCollection("prints"))
+  .filter((p) => p.data.lang === "en");
+---
+
+<BaseLayout
+  title="SoriaMoriaPrints"
+  description="Fine Art Prints · Nordic Fairytales Reimagined."
+>
+
+<section class="hero">
+  <div class="container hero-inner">
+    
+    <div class="hero-text">
+      <p class="meta">{t.heroMeta}</p>
+
+      <h1 class="hero-title">
+        {t.heroTitle1}<br />
+        {t.heroTitle2}
+      </h1>
+
+      <p class="hero-lead">
+        {t.heroLead}
+      </p>
+
+      <div class="hero-actions">
+        <a href="#collection" class="btn-gold">
+          {t.explore}
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <img 
+        src="/images/prints/og-default.webp"
+        alt="Soria Moria Castle – Fine Art Print"
+        loading="eager"
+      />
+    </div>
+
+  </div>
+</section>
+
+<section class="series-intro">
+  <div class="container">
+    <div class="narrow series-text">
+
+      <p>
+        These works return to the landscapes of Nordic fairy tales — 
+        to their stillness, light and gravity.
+      </p>
+
+      <p>
+        The moments are chosen before resolution. 
+        Before arrival, before transformation is complete.
+      </p>
+      
+      <p>
+        Within this interval there is direction and depth, 
+        life that endures, and a weight that grounds.
+      </p>
+
+      <p>
+        SoriaMoriaPrints seeks this space — 
+        what is glimpsed in the distance, 
+        and what slowly gathers in light.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<section id="collection" class="featured">
+  <div class="container">
+
+    <div class="featured-header">
+      <p class="section-meta">{t.collection}</p>
+      <h2>{t.selectedWorks}</h2>
+    </div>
+
+    <div class="featured-grid">
+      {prints.map((print) => (
+        <PrintCard
+          title={print.data.title}
+          id={print.id}
+          image={print.data.cover}
+          price={print.data.price}
+          lang="en"
+        />
+      ))}
+    </div>
+
+  </div>
+</section>
+
+</BaseLayout>

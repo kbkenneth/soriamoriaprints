@@ -1,0 +1,229 @@
+/* ============================= */
+/* HERO SECTION */
+/* ============================= */
+
+.hero {
+  padding: 8rem 0 6rem 0;
+  padding-top: var(--space-section);
+  padding-bottom: 4.5rem;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1.2fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.meta {
+  font-size: var(--step--1);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-size: var(--step-6);
+  line-height: 1.15;   /* tidligere 1.1 */
+  margin-bottom: 1.8rem;
+  letter-spacing: -0.01em;
+}
+
+.hero-lead {
+  font-size: var(--step-1);
+  max-width: 34ch;
+  margin-bottom: 2.8rem;
+  line-height: 1.7;
+  color: var(--color-deep-blue);
+}
+
+
+
+.hero-actions {
+  margin-top: 1rem;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: var(--shadow-soft);
+}
+
+
+
+.series-intro {
+  padding-top: 4.5rem;
+  padding: 6rem 0 7rem 0;
+}
+
+
+.hero-text {
+  max-width: 720px;
+}
+
+
+ /* ========================= */
+  /* SERIES INTRO – HOMEPAGE */
+  /* ========================= */
+
+  .series-intro {
+    padding: 6rem 0 7rem 0;
+  }
+
+  .series-text {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .series-text p {
+    font-size: var(--step-0);
+    line-height: 1.75;
+    margin-bottom: 1.9rem;
+    color: var(--color-deep-blue);
+  }
+
+  /* Første avsnitt litt større (ingress-effekt) */
+  .series-text p:first-of-type {
+    font-size: var(--step-1);
+    line-height: 1.7;
+  }
+
+  /* Subtil overgang før featured */
+  .series-intro::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--color-gold-soft);
+    margin: 5rem auto 0 auto;
+    opacity: 0.6;
+  }
+
+
+
+/* ============================= */
+/* FEATURED SECTION */
+/* ============================= */
+
+.featured {
+  padding: 8rem 0;
+}
+
+.featured-header {
+  max-width: 520px;
+  margin-bottom: 4rem;
+}
+
+.section-meta {
+  font-size: var(--step--1);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+
+.featured h2 {
+  font-size: var(--step-4);
+  margin: 0;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 4rem;
+}
+
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .hero-title {
+    font-size: var(--step-5);
+  }
+
+  .hero-image {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .hero {
+    padding-top: 5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.4rem;
+    line-height: 1.2;
+  }
+
+  .hero-lead {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 32ch;
+  }
+
+  .hero-image {
+    order: -1;   /* bilde først */
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .series-intro {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+  }
+
+  .series-text {
+    max-width: 100%;
+  }
+
+  .series-text p:first-of-type {
+    font-size: 1.1rem;
+  }
+
+  .series-text p {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .series-intro::after {
+    margin: 3rem auto 0 auto;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .featured-grid {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  .print-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .print-card .excerpt {
+    font-size: 0.9rem;
+  }
+
+}

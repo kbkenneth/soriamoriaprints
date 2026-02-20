@@ -1,0 +1,406 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "SoriaMoriaPrints",
+  description = "Fine Art Prints · Nordic Fairytales Reimagined.",
+  image = "/images/og-default.jpg"
+} = Astro.props;
+
+const pathname = Astro.url.pathname;
+const site = Astro.site?.toString().replace(/\/$/, "") || "";
+
+const isEnglish = pathname.startsWith("/en");
+
+const currentLang = isEnglish ? "en" : "no";
+const ogLocale = isEnglish ? "en_GB" : "nb_NO";
+const ogAlternateLocale = isEnglish ? "nb_NO" : "en_GB";
+
+let noPath = "/";
+let enPath = "/en/";
+
+if (pathname !== "/") {
+  if (isEnglish) {
+    noPath = pathname.replace(/^\/en/, "") || "/";
+    enPath = pathname;
+  } else {
+    noPath = pathname;
+    enPath = `/en${pathname}`;
+  }
+}
+
+const noUrl = `${site}${noPath}`;
+const enUrl = `${site}${enPath}`;
+const defaultUrl = `${site}/`;
+
+const canonicalURL = new URL(pathname, site);
+
+const isAbout = pathname.endsWith("/about");
+---
+<!DOCTYPE html>
+<html lang={currentLang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+  <link rel="alternate" hreflang="no" href={noUrl} />
+  <link rel="alternate" hreflang="en" href={enUrl} />
+  <link rel="alternate" hreflang="x-default" href={defaultUrl} />
+
+  <meta property="og:locale" content={ogLocale} />
+  <meta property="og:locale:alternate" content={ogAlternateLocale} />
+
+  <link rel="canonical" href={canonicalURL} />
+  <link rel="alternate" hreflang="no" href={noUrl} />
+  <link rel="alternate" hreflang="en" href={enUrl} />
+  <link rel="alternate" hreflang="x-default" href={defaultUrl} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={image} />
+  <meta property="og:type" content="website" />
+
+  <title>{title}</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- Snipcart -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.css"
+  />
+  <script
+    async
+    src="https://cdn.snipcart.com/themes/v3.4.1/default/snipcart.js"
+  ></script>
+  <div
+    hidden
+    id="snipcart"
+    data-api-key="YWM1NWU1NjMtM2IwMS00MjBhLTk1MzYtN2MyMWU4OGE3ODhmNjM5MDY1Nzg0Mzk4MDQxOTU5"
+  ></div>
+
+  <style is:global>
+    :root {
+      /* TYPOGRAPHY SCALE */
+      --step--2: 0.75rem;
+      --step--1: 0.875rem;
+      --step-0: 1rem;
+      --step-1: 1.25rem;
+      --step-2: 1.563rem;
+      --step-3: 1.953rem;
+      --step-4: 2.441rem;
+      --step-5: 3.052rem;
+      --step-6: 3.815rem;
+
+      /* FONTS */
+      --font-serif: "EB Garamond", serif;
+      --font-display: "Cormorant Garamond", serif;
+
+      /* LINE HEIGHT */
+      --lh-title: 1.2;
+      --lh-body: 1.65;
+
+      /* COLORS */
+      --color-ink: #1c2230;
+      --color-deep-blue: #1f2a44;
+      --color-midnight: #141a28;
+      --color-parchment: #f6f3eb;
+      --color-muted: #6e7485;
+      --color-gold: #b89b5e;
+      --color-gold-soft: #d6c08a;
+
+      --bg-main: var(--color-parchment);
+      --text-main: var(--color-ink);
+
+      --shadow-soft: 0 4px 18px rgba(0,0,0,0.06);
+
+      --space-hero-bottom: 5rem;
+      --space-section: 7rem;
+      --space-tight: 4rem;
+    }
+
+
+    @media (min-width: 1440px) {
+      .container {
+        max-width: 1240px;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .hero {
+        padding-top: 9rem;
+        padding-bottom: 6rem;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .hero-title {
+        font-size: 4.2rem;  /* litt større enn step-6 */
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .series-text {
+        max-width: 760px;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .featured-grid {
+        gap: 4rem;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      footer {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-serif);
+      font-size: var(--step-0);
+      line-height: var(--lh-body);
+      background: var(--bg-main);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .narrow {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .about-intro h1 {
+      font-size: var(--step-4);
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .about-text {
+      margin-top: 2rem;
+    }
+
+    .about-text p {
+      margin-bottom: 1.9rem;
+    }
+
+    .about-intro h1::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 1px;
+      background: var(--color-gold-soft);
+      margin: 2rem auto 0 auto;
+      opacity: 0.6;
+    }
+
+    header {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: var(--step-2);
+      color: var(--color-deep-blue);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    main {
+      min-height: 60vh;
+    }
+
+    footer {
+      margin-top: 6rem;
+      padding: 3rem 0;
+      font-size: var(--step--1);
+      color: var(--color-muted);
+      border-top: 1px solid rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      color: var(--color-deep-blue);
+      line-height: var(--lh-title);
+      margin-top: 0;
+    }
+
+    h1 { font-size: var(--step-5); }
+    h2 { font-size: var(--step-4); }
+    h3 { font-size: var(--step-3); }
+
+    a {
+      color: var(--color-deep-blue);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--color-gold);
+      border-color: var(--color-gold-soft);
+    }
+
+    .btn-gold {
+      display: inline-block;
+      padding: 0.9rem 1.6rem;
+      font-size: var(--step--1);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--color-deep-blue);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn-gold:hover {
+      background: var(--color-gold);
+      color: var(--color-midnight);
+    }
+
+    section {
+      padding: 6rem 0;
+    }
+      /* HEADER LAYOUT */
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .nav-link {
+    font-size: var(--step--1);
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--color-muted);
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-deep-blue);
+  }
+
+  .nav-link.active {
+    color: var(--color-deep-blue);
+  }
+
+
+  /* LANGUAGE SWITCH */
+
+  .lang-switch {
+    font-size: var(--step--1);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .lang-switch a {
+    text-decoration: none;
+    color: var(--color-muted);
+    transition: color 0.3s ease;
+  }
+
+  .lang-switch a:hover {
+    color: var(--color-deep-blue);
+  }
+
+  .lang-switch a.active {
+    color: var(--color-deep-blue);
+  }
+
+  .lang-switch .divider {
+    color: var(--color-muted);
+  }
+
+  footer {
+    font-size: var(--step--1);
+    opacity: 0.8;
+  }
+
+ 
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container header-inner">
+
+      <a href="/" class="logo">
+        SoriaMoriaPrints
+      </a> 
+
+      <nav class="header-nav">
+
+        <a
+          href={isEnglish ? "/en/about" : "/about"}
+          class={`nav-link ${isAbout ? "active" : ""}`}
+        >
+          {isEnglish ? "About" : "Om prosjektet"}
+        </a>
+
+        <div class="lang-switch">
+          <a href={noPath} class={!isEnglish ? "active" : ""}>NO</a>
+          <span class="divider">·</span>
+          <a href={enPath} class={isEnglish ? "active" : ""}>EN</a>
+        </div>
+
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer>
+    <div class="container">
+      © {new Date().getFullYear()} SoriaMoriaPrints · 
+      {isEnglish
+        ? "Nordic fairy tales in a new light"
+        : "Nordiske eventyr i nytt lys"}
+    </div>
+  </footer>
+</body>
+</html>

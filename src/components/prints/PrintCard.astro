@@ -1,0 +1,95 @@
+---
+export interface Props {
+  title: string;
+  id: string;      // <-- bruk print.id
+  image: string;
+  price?: string;
+  lang: "no" | "en";
+}
+
+const { title, id, image, price, lang } = Astro.props;
+
+// Hent ren slug fra filnavn
+const slug = id.split("/").pop()?.replace(".md", "") ?? "";
+
+// Bygg riktig URL
+const href = `${lang === "en" ? "/en" : ""}/prints/${slug}`;
+---
+
+<article class="print-card">
+
+  <a href={href} class="print-image">
+    <img src={image} alt={title} loading="lazy" />
+  </a>
+
+  <div class="print-meta">
+    <h3 class="print-title">
+      <a href={href}>{title}</a>
+    </h3>
+
+    {price && <p class="print-price">{price}</p>}
+  </div>
+
+</article>
+
+<style>
+  .print-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    transition: transform 0.4s ease;
+  }
+
+  .print-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .print-image {
+    display: block;
+    background: var(--color-parchment);
+    padding: 1.2rem;
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 0.4s ease;
+  }
+
+  .print-card:hover .print-image {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .print-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .print-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .print-title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .print-title a {
+    color: var(--color-deep-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .print-title a:hover {
+    color: var(--color-gold);
+  }
+
+  .print-price {
+    font-size: var(--step--1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin: 0;
+  }
+</style>
