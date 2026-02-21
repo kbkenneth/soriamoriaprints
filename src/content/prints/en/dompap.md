@@ -1,22 +1,26 @@
 ---
 title: "Dompap"
-price: "Fra 490 NOK"
+snipcartId: "DOMPAP"
+price: "Fra 390 NOK"
 excerpt: "A sign of life in winter stillness."
 cover: "/images/prints/dompap/cover.webp"
 lang: "en"
 
-basePrice: 490
-
 sizes:
   - label: "A4"
     price: 390
-    sku: "RPG"
+    sku: "GLOBAL-HPR-A4"
+    file: "/print-files/dompap/A4.jpg"
+
   - label: "A3"
     price: 890
-    sku: "RPG"
+    sku: "GLOBAL-HPR-A3"
+    file: "/print-files/dompap/A3.jpg"
+
   - label: "A2"
     price: 1090
-    sku: "RPG"
+    sku: "GLOBAL-HPR-A2"
+    file: "/print-files/dompap/A2.jpg"
 ---
 Against the white winter landscape, the bullfinch stands out with its vivid red breast. 
 A small sign of life in a season shaped by stillness.

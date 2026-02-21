@@ -1,16 +1,16 @@
 ---
 title: "Nøkken"
+snipcartId: "NOKKEN"
 price: "Fra 490 NOK"
 excerpt: "Mellom overflate og dybde."
 cover: "/images/prints/nokken/cover.webp"
 lang: "no"
 
-basePrice: 490
-
 sizes:
   - label: "60 x 40 cm"
     price: 890
-    sku: "RPG"
+    sku: "GLOBAL-HPR-16X24"
+    file: "/print-files/nokken/60x40.jpg"
 ---
 Ved vannkanten hviler en stillhet som ikke er helt tom. 
 Noe er nærværende, selv når det knapt kan sees.

@@ -1,0 +1,27 @@
+import { getCollection } from "astro:content";
+
+export async function GET() {
+  const products = await getCollection("prints");
+
+  const data: any = {};
+
+  for (const product of products) {
+    const p = product.data;
+
+    data[p.snipcartId] = {
+      sizes: Object.fromEntries(
+        p.sizes.map((s: any) => [
+          s.label,
+          {
+            sku: s.sku,
+            file: `https://soriamoriaprints.netlify.app${s.file}`
+          }
+        ])
+      )
+    };
+  }
+
+  return new Response(JSON.stringify(data), {
+    headers: { "Content-Type": "application/json" }
+  });
+}

@@ -1,22 +1,26 @@
 ---
 title: "Dompap"
-price: "Fra 490 NOK"
+snipcartId: "DOMPAP"
+price: "Fra 390 NOK"
 excerpt: "Et tegn på liv i vinterens stillhet."
 cover: "/images/prints/dompap/cover.webp"
 lang: "no"
 
-basePrice: 490
-
 sizes:
   - label: "A4"
     price: 390
-    sku: "RPG"
+    sku: "GLOBAL-HPR-A4"
+    file: "/print-files/dompap/A4.jpg"
+
   - label: "A3"
     price: 890
-    sku: "RPG"
+    sku: "GLOBAL-HPR-A3"
+    file: "/print-files/dompap/A3.jpg"
+
   - label: "A2"
     price: 1090
-    sku: "RPG"
+    sku: "GLOBAL-HPR-A2"
+    file: "/print-files/dompap/A2.jpg"
 ---
 Mot det hvite vinterlandskapet trer dompapen frem med sitt klare røde bryst. 
 Et lite tegn på liv i en årstid preget av stillhet.

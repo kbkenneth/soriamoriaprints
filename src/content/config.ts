@@ -4,11 +4,11 @@ const prints = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
-    price: z.string(),
+    snipcartId: z.string(),
     excerpt: z.string(),
     cover: z.string(),
+    price: z.string(),
     lang: z.enum(["no", "en"]),
-    basePrice: z.number(),
     sizes: z.array(
       z.object({
         label: z.string(),

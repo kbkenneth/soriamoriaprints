@@ -1,22 +1,26 @@
 ---
 title: "Kvitebjørn kong Valemon"
+snipcartId: "VALEMON"
 price: "Fra 490 NOK"
 excerpt: "A story of transformation, strength and trust."
 cover: "/images/prints/kvitebjorn-kong-valemon/cover.webp"
 lang: "en"
 
-basePrice: 490
-
 sizes:
   - label: "30 x 40 cm"
     price: 490
-    sku: "RPG"
+    sku: "GLOBAL-HPR-12X16"
+    file: "/print-files/kvitebjorn-kong-valemon/30x40.jpg"
+
   - label: "40 x 50 cm"
     price: 890
-    sku: "RPG"
+    sku: "GLOBAL-HPR-16X20"
+    file: "/print-files/kvitebjorn-kong-valemon/40x50.jpg"
+
   - label: "60 x 80 cm"
     price: 1590
-    sku: "RPG"
+    sku: "GLOBAL-HPR-24X32"
+    file: "/print-files/kvitebjorn-kong-valemon/60x80.jpg"
 ---
 To encounter the unfamiliar is also to encounter what is hidden within ourselves.
 

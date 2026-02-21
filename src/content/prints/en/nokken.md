@@ -1,16 +1,16 @@
 ---
 title: "Nøkken"
+snipcartId: "NOKKEN"
 price: "Fra 490 NOK"
 excerpt: "Between surface and depth."
 cover: "/images/prints/nokken/cover.webp"
 lang: "en"
 
-basePrice: 490
-
 sizes:
   - label: "60 x 40 cm"
     price: 890
-    sku: "RPG"
+    sku: "GLOBAL-HPR-16X24"
+    file: "/print-files/nokken/60x40.jpg"
 ---
 By the water’s edge rests a stillness that is not entirely empty. 
 Something is present, even when barely seen.

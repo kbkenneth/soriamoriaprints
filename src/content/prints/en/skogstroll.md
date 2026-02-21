@@ -1,22 +1,26 @@
 ---
 title: "Skogstroll"
+snipcartId: "SKOGSTROLL"
 price: "Fra 490 NOK"
 excerpt: "Between roots and shadow."
 cover: "/images/prints/skogstroll/cover.webp"
 lang: "en"
 
-basePrice: 490
-
 sizes:
   - label: "30 x 45 cm"
     price: 490
-    sku: "RPG"
+    sku: "GLOBAL-HPR-12X18"
+    file: "/print-files/skogstroll/30x45.jpg"
+
   - label: "40 x 60 cm"
     price: 890
-    sku: "RPG"
+    sku: "GLOBAL-HPR-16X24"
+    file: "/print-files/skogstroll/40x60.jpg"
+
   - label: "60 x 90 cm"
     price: 1590
-    sku: "RPG"
+    sku: "GLOBAL-HPR-24X36"
+    file: "/print-files/skogstroll/60x90.jpg"
 ---
 Deep within the forest rests a stillness that is not empty. 
 Between trunks and shadows, a presence can be sensed — as if it belongs to the place itself.

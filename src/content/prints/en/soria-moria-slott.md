@@ -1,22 +1,26 @@
 ---
 title: "Soria Moria Slott"
-price: "Fra 1 290 NOK"
+snipcartId: "SORIA_MORIA_SLOTT"
+price: "Fra 490 NOK"
 excerpt: "A study of longing, direction and light."
 cover: "/images/prints/soria-moria-slott/cover.webp"
 lang: "en"
 
-basePrice: 490
-
 sizes:
-  - label: "45 × 30 cm"
+  - label: "45 x 30 cm"
     price: 490
-    sku: "RPG"
-  - label: "60 × 40 cm"
+    sku: "GLOBAL-HPR-12X18"
+    file: "/print-files/soria-moria-slott/45x30.jpg"
+
+  - label: "60 x 40 cm"
     price: 890
-    sku: "RPG"
-  - label: "90 × 60 cm"
+    sku: "GLOBAL-HPR-16X24"
+    file: "/print-files/soria-moria-slott/60x40.jpg"
+
+  - label: "90 x 60 cm"
     price: 1490
-    sku: "RPG"
+    sku: "GLOBAL-HPR-24X36"
+    file: "/print-files/soria-moria-slott/90x60.jpg"
 ---
 Far in the distance, the castle emerges, bathed in light. 
 A destination that seems unreachable, yet still draws us forward.
@@ -29,4 +33,3 @@ not a certainty.
 The motif concerns not arrival, but direction. 
 The light that persists even when the path is unclear, 
 and the longing that leads us toward what we do not yet see.
-
