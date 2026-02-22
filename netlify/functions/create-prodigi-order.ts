@@ -53,7 +53,7 @@ export const handler: Handler = async (event) => {
       },
       items
     };
-
+/*
     const response = await fetch("https://api.prodigi.com/v4.0/Orders", {
       method: "POST",
       headers: {
@@ -62,7 +62,9 @@ export const handler: Handler = async (event) => {
       },
       body: JSON.stringify(prodigiOrder)
     });
-
+*/    
+    console.log("Prodigi order payload:", JSON.stringify(prodigiOrder, null, 2));
+/*
     const result = await response.text();
     console.log("Prodigi response:", result);
 
@@ -71,7 +73,7 @@ export const handler: Handler = async (event) => {
     }
 
     return { statusCode: 200 };
-
+*/
   } catch (error: any) {
     console.error("Function error:", error);
     return { statusCode: 500, body: error.toString() };

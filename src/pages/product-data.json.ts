@@ -3,10 +3,12 @@ import { getCollection } from "astro:content";
 export async function GET() {
   const products = await getCollection("prints");
 
-  const data: any = {};
+  const data: Record<string, any> = {};
 
   for (const product of products) {
     const p = product.data;
+
+    if (!p.snipcartId || !p.sizes) continue;
 
     data[p.snipcartId] = {
       sizes: Object.fromEntries(
