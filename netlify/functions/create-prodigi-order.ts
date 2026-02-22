@@ -1,43 +1,55 @@
 import type { Handler } from "@netlify/functions";
 
+// Midlertidig dry-run-versjon (ingen ordre sendes til Prodigi)
 export const handler: Handler = async (event) => {
   try {
-    const body = JSON.parse(event.body || "{}");
+    // Parse Snipcart webhook body
+    const body = JSON.parse(event.body ?? "{}");
 
-    // Vi ignorerer alt som ikke er ferdig betalt ordre
+    // Bare prosesser order.completed
     if (body.eventName !== "order.completed") {
-      return { statusCode: 200 };
+      return {
+        statusCode: 200,
+        body: "Ignored event"
+      };
     }
 
     const order = body.content;
 
-    // SKU mapping basert på Snipcart custom field value
-    const skuMap: Record<string, string> = {
-      "30 x 45 cm": "GLOBAL-HPR-12X18",
-      "40 x 60 cm": "GLOBAL-HPR-16X24",
-      "60 x 90 cm": "GLOBAL-HPR-24X36"
-    };
+    // Hent produktdata fra JSON-endepunktet vi genererte
+    const productDataResponse = await fetch(
+      "https://soriamoriaprints.netlify.app/product-data.json"
+    );
+
+    const productData = await productDataResponse.json();
 
     const items = order.items.map((item: any) => {
       const sizeField = item.customFields.find(
         (f: any) => f.name === "Størrelse"
       );
 
-    const size = sizeField?.value;
-    const productId = item.id;
+      const size = sizeField?.value;
+      const product = productData[item.id];
+      const sku = product?.sizes?.[size]?.sku;
+      const fileUrl = product?.sizes?.[size]?.file;
 
-    return {
-    sku: skuMap[size],
-    copies: item.quantity,
-    sizing: "fit",
-    assets: [
-        {
-        printArea: "default",
-        url: getPrintFileUrl(productId, size)
-        }
-    ]
-    };
+      if (!sku || !fileUrl) {
+        throw new Error(
+          `Missing SKU or file for ${item.id} / size ${size}`
+        );
+      }
 
+      return {
+        sku,
+        copies: item.quantity,
+        sizing: "fit",
+        assets: [
+          {
+            printArea: "default",
+            url: fileUrl
+          }
+        ]
+      };
     });
 
     const prodigiOrder = {
@@ -53,49 +65,23 @@ export const handler: Handler = async (event) => {
       },
       items
     };
-/*
-    const response = await fetch("https://api.prodigi.com/v4.0/Orders", {
-      method: "POST",
-      headers: {
-        "X-API-Key": process.env.PRODIGI_API_KEY!,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(prodigiOrder)
-    });
-*/    
-    console.log("Prodigi order payload:", JSON.stringify(prodigiOrder, null, 2));
-/*
-    const result = await response.text();
-    console.log("Prodigi response:", result);
 
-    if (!response.ok) {
-      throw new Error(`Prodigi error: ${result}`);
-    }
+    // Log payload – dry-run (ikke send til Prodigi ennå)
+    console.log(
+      "Prodigi order payload:",
+      JSON.stringify(prodigiOrder, null, 2)
+    );
 
-    return { statusCode: 200 };
-*/
+    return {
+      statusCode: 200,
+      body: "OK"
+    };
+
   } catch (error: any) {
     console.error("Function error:", error);
-    return { statusCode: 500, body: error.toString() };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message })
+    };
   }
 };
-
-
-function getPrintFileUrl(productId: string, size: string): string {
-  const printFileMap: Record<string, Record<string, string>> = {
-    "RPG": {
-      "30 x 45 cm": "https://soriamoriaprints.netlify.app/print-files/skogstroll/45x30.jpg",
-      "40 x 60 cm": "https://soriamoriaprints.netlify.app/print-files/skogstroll/60x40.jpg",
-      "60 x 90 cm": "https://soriamoriaprints.netlify.app/print-files/skogstroll/90x60.jpg"
-    }
-  };
-
-  const fileUrl = printFileMap[productId]?.[size];
-
-  if (!fileUrl) {
-    throw new Error(`Ingen printfil for produkt ${productId}, størrelse ${size}`);
-  }
-
-  return fileUrl;
-}
-
